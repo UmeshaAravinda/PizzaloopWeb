@@ -14,11 +14,18 @@ import java.util.List;
 public class MainController {
     @Autowired
     private PizzaRepository pizzaRepository;
+    private static final String SUCCESS= "Saved";
+    /*
+     *READ Operation
+     */
     @GetMapping(path="/all")
     public @ResponseBody
     Iterable<PizzaDetails> getPizzaDetails() {
         return pizzaRepository.findAll();
     }
+    /*
+     *READ Operation based on Pizza ID
+     */
 
     @GetMapping(path="/findByPizzaId")
     public @ResponseBody
@@ -26,6 +33,9 @@ public class MainController {
         return pizzaRepository.findByPizzaId(id);
     }
 
+    /*
+     *CREATE Operation
+     */
     @GetMapping(path="/add")
     public @ResponseBody String addNewPizza(@RequestParam String name, @RequestParam String description, @RequestParam Double price) {
         PizzaDetails pizzaDetails = new PizzaDetails();
@@ -36,10 +46,17 @@ public class MainController {
         return SUCCESS;
     }
 
+    /*
+     *DELETE Operation
+     */
     @GetMapping(path="/deleteByPizzaId")
     public @ResponseBody List<PizzaDetails> deletePizzaById(@RequestParam Integer id) {
         return pizzaRepository.deleteByPizzaId(id);
     }
+
+    /*
+     *UPDATE Operation
+     */
 
     @GetMapping(path="/update")
     public @ResponseBody List<PizzaDetails> updatePizzaDetails(@RequestParam Integer id, @RequestParam String name, @RequestParam String description, @RequestParam Double price) {
